@@ -1,0 +1,19 @@
+{
+  "name": "kmgbot",
+  "version": "1.0.0",
+  "description": "Kmg bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alvargon75/KMGLeagueBot.git"
+  },
+  "author": "Alvargon75",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alvargon75/KMGLeagueBot/issues"
+  },
+  "homepage": "https://github.com/Alvargon75/KMGLeagueBot#readme"
+}
