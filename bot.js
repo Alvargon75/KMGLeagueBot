@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const config = require('./config.json');
-const pref = '!kmg ';
+const pref = config.prefix + " ";
 
 bot.on('ready', () => {
     console.log("Running...")
@@ -35,4 +35,4 @@ bot.on('message', (message) => {
     }
 });
 
-bot.login('MjgwNzE5ODM0Nzc2NDY5NTE2.C4NgQg.M2qWarNgFKx8rHwHYf6xa63uIo8');
+bot.login(private.token);
