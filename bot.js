@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const config = require('./config.json');
+const private = require('./private.json'); // This file contains the token, you have to make one if you are using the source code yourself
 const pref = config.prefix + " ";
 
 bot.on('ready', () => {
