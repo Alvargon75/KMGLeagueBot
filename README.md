@@ -1,0 +1,3 @@
+# KMGLeagueBot
+
+A discord bot
