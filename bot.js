@@ -23,10 +23,14 @@ bot.on('message', (message) => {
     }else if(command === 'say'){
         message.channel.sendMessage(args.join(" "));
     }else if(command === 'add'){
-        let num1 = parseInt(args[0]);
-        let num2 = parseInt(args[1]);
 
-        message.channel.sendMessage(num1 + num2);
+        let total = 0;
+        for (let i = 0; i < args.length; i++) {
+            let nm = parseInt(args[i])
+            total += nm;
+        }
+
+        message.channel.sendMessage(total);
     }
 });
 
