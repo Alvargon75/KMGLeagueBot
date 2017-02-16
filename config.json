@@ -1,3 +1,6 @@
 {
-    "prefix": "!kmg"
+    "prefix": "!kmg",
+    "league": {
+        "defRegion": "EUW"
+    }
 }

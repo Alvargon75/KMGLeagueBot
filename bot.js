@@ -36,4 +36,4 @@ bot.on('message', (message) => {
     }
 });
 
-bot.login(private.token);
+bot.login(private.discordToken);
