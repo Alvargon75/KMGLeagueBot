@@ -1,6 +1,13 @@
 {
     "prefix": "!kmg",
+    "noticeVoiceChannelActivity": {
+        "join": true,
+        "leave": false,
+        "audioWarning": true,
+        "route": "./aud"
+    },
     "league": {
         "defRegion": "EUW"
-    }
+    },
+    "generalCH": "General (LoL)"
 }

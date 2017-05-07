@@ -38,10 +38,61 @@ bot.on('message', (message) => {
     }
 });
 
-// Updates Event Handler
+// Voice Update Event Handler
 
-bot.on('presenceUpdate', (oldMember, newMember) => {
-    
-})
+bot.on('voiceStateUpdate', (oldMember, newMember) => {
+
+    if(oldMember.voiceChannel === config.generalCh && config.noticeVoiceChannelActivity.join && newMember.user.username !== "kmgbot"){
+
+        // Prints the text notification
+        newMember.guild.channels.get("241853467814002688").send(`${newMember.user.username} ha entrado al chat de voz.`);
+
+        // Checks and executes if the voice notification is on
+        if(config.noticeVoiceChannelActivity.audioWarning === true){
+
+            let vc = newMember.voiceChannel;
+
+
+            vc.join().then(connection => {
+
+                let un = function () { // Clunky ass funtion but it makes is work
+                    let result = newMember.user.username.toLowerCase();
+                    return result;
+                }();
+                console.log(un);
+
+                // TODO: remove unnecesaty console.log and add time for the auds intstead of nulls
+                let fileName = function () {
+                    switch (un) {
+                        case "alvargon75":
+                            return ["/Alvargon75.mp3", null];
+                            break;
+                        case "xabiru10":
+                            return ["/Xabiru10.mp3", null];
+                            break;
+                        case "aksu200":
+                            return ["/Aksu200.mp3", null];
+                            break;
+                        case "alexkmg19":
+                            return ["/alexkmg19.mp3", null];
+                            break;
+                        default:
+
+                    }
+                }();
+
+                let dispatcher = connection.playFile(config.noticeVoiceChannelActivity.route + fileName[0]);
+                setTimeout(() => {vc.leave()}, 10000)
+
+            }).catch(err => {console.log(err); vc.leave();});
+
+        };
+    }else if(newMember.voiceChannel === config.generalCh && config.noticeVoiceChannelActivity.leave && newMember.user.username !== "kmgbot"){
+
+        newMember.guild.channels.get("241853467814002688").send(`${newMember.user.username} ha salido del chat de voz.`);
+
+
+    }
+});
 
 bot.login(private.discordToken);
