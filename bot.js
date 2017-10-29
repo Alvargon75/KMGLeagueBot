@@ -1,11 +1,13 @@
 const Discord = require('discord.js');
+const yaml = require('yaml-js');
 const bot = new Discord.Client();
 const config = require('./config.json');
+const locale = require('./locale.json');
 const private = require('./private.json'); // This file contains the token, you have to make one if you are using the source code yourself
 const prefix = config.prefix + " ";
 
 bot.on('ready', () => {
-    console.log("Running...")
+    console.log("Running...");
 });
 
 // Message Event Handler
@@ -23,7 +25,7 @@ bot.on('message', (message) => {
     let args = message.content.split(" ").slice(2);
 
     if(command === 'test'){
-        message.channel.send('I am running correctly');
+        message.channel.send(locale.commands.test);
     }else if(command === 'say'){
         message.channel.send(args.join(" "));
     }else if(command === 'add'){
@@ -35,7 +37,9 @@ bot.on('message', (message) => {
         }
 
         message.channel.send(total);
-    }
+    }else if(command === 'help'){
+        message.channel.send(locale.help);
+    };
 });
 
 // Voice Update Event Handler
@@ -55,34 +59,42 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
 
             vc.join().then(connection => {
 
-                let un = function () { // Clunky ass funtion but it makes is work
-                    let result = newMember.user.username.toLowerCase();
-                    return result;
-                }();
-                console.log(un);
-
-                // TODO: remove unnecesaty console.log and add time for the auds intstead of nulls
+                // TODO: remove unnecesaty console.log and add time for the auds intstead of null
                 let fileName = function () {
+
+                    let un = newMember.user.username.toLowerCase();
+
+                    console.log(un);
+
                     switch (un) {
                         case "alvargon75":
-                            return ["/Alvargon75.mp3", null];
+                            return ["/Alvargon75.flac", 3999];
                             break;
                         case "xabiru10":
-                            return ["/Xabiru10.mp3", null];
+                            return ["/Xabiru10.flac", 3999];
                             break;
                         case "aksu200":
-                            return ["/Aksu200.mp3", null];
+                            return ["/Aksu200.flac", 2999];
                             break;
-                        case "alexkmg19":
-                            return ["/alexkmg19.mp3", null];
+                        case "alexkmg":
+                            return ["/alexkmg.flac", 3999];
+                            break;
+                        case "isma01l":
+                            return ["/isma01l.flac", 3999];
+                            break;
+                        case "davidglmp":
+                            return ["/davidglmp.flac", 4999];
+                            break;
+                        case "petrobichyt":
+                            return ["/petrobichyt.flac", 3999];
                             break;
                         default:
-
+                            return ["/def.flac", 1999];
                     }
                 }();
 
                 let dispatcher = connection.playFile(config.noticeVoiceChannelActivity.route + fileName[0]);
-                setTimeout(() => {vc.leave()}, 10000)
+                setTimeout(() => {vc.leave()}, fileName[1] + 2999);
 
             }).catch(err => {console.log(err); vc.leave();});
 
@@ -90,7 +102,6 @@ bot.on('voiceStateUpdate', (oldMember, newMember) => {
     }else if(newMember.voiceChannel === config.generalCh && config.noticeVoiceChannelActivity.leave && newMember.user.username !== "kmgbot"){
 
         newMember.guild.channels.get("241853467814002688").send(`${newMember.user.username} ha salido del chat de voz.`);
-
 
     }
 });

@@ -1,0 +1,7 @@
+{
+    "commands": {
+        "test": "I am running correctly",
+        "lol": "RIP"
+    },
+    "help": "Bienvenido al bot del KMG Team \n por el momento tenemos los siguientes comandos: \n \n - test: testea si el bot funciona"
+}
